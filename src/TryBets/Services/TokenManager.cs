@@ -25,7 +25,7 @@ namespace TryBets.Services
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenDescriptor = new SecurityTokenDescriptor()
-            {    
+            {
                 Subject = claims,
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_tokenOptions.Secret!)),
