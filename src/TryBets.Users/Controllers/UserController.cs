@@ -19,19 +19,17 @@ public class UserController : Controller
     [HttpPost("signup")]
     public IActionResult Post([FromBody] User user)
     {
-       try
-       {
-            User novoUsuario = _repository.Post(user);
-            string token = new TokenManager().Generate(novoUsuario);
-            AuthDTOResponse resposta = new AuthDTOResponse { Token = token };
-
-            return Created("", resposta);
-       }
-       catch (Exception ex)
-       {
-
+        try
+        {
+            User newUser = _repository.Post(user);
+            string token = new TokenManager().Generate(newUser);
+            AuthDTOResponse response = new AuthDTOResponse { Token = token };
+            return Created("", response);
+        }
+        catch (Exception ex)
+        {
             return BadRequest(new { message = ex.Message });
-       }
+        }
     }
 
     [HttpPost("login")]
@@ -39,15 +37,13 @@ public class UserController : Controller
     {
         try
         {
-            User usuarioEncontrado = _repository.Login(login);
-            string token = new TokenManager().Generate(usuarioEncontrado);
-            AuthDTOResponse resposta = new AuthDTOResponse { Token = token };
-
-            return Ok(resposta);
+            User userFound = _repository.Login(login);
+            string token = new TokenManager().Generate(userFound);
+            AuthDTOResponse response = new AuthDTOResponse { Token = token };
+            return Ok(response);
         }
         catch (Exception ex)
         {
-
             return BadRequest(new { message = ex.Message });
         }
     }

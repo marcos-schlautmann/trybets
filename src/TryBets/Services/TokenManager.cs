@@ -12,7 +12,8 @@ namespace TryBets.Services
         private readonly TokenOptions _tokenOptions;
         public TokenManager()
         {
-            _tokenOptions = new TokenOptions {
+            _tokenOptions = new TokenOptions
+            {
                 Secret = "4d82a63bbdc67c1e4784ed6587f3730c",
                 ExpiresDay = 1
             };
